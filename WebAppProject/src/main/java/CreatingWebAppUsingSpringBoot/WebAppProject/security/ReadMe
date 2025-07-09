@@ -1,0 +1,12 @@
+@Configuration: Marks this class as a source of bean definitions.
+passwordEncoder() Bean:
+Creates and returns a BCryptPasswordEncoder. This is crucial for securely hashing passwords (encrypting them) before storing them, so plain text passwords are never exposed.
+userDetailsManager() Bean:
+This is where users are defined. It takes the passwordEncoder bean to hash passwords.
+User.builder() is used to create two UserDetails objects:
+"Reshu" with password "pass" and roles "USER", "ADMIN".
+"User2" with password "anotherpass" and role "USER".
+Important: passwordEncoder.encode() is called to hash the passwords before they are stored.
+InMemoryUserDetailsManager stores these users in memory. When a user tries to log in, Spring Security will check against these in-memory users.
+In essence: This code configures Spring Security to use two hardcoded users ("Reshu" and "User2") for authentication, storing their securely hashed passwords directly in the application's memory. This is typically used for 
+development or simple applications, not for production, where users usually come from a database.
